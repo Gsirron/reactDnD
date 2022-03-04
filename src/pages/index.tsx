@@ -6,9 +6,14 @@ import styles from "../styles/Home.module.css";
 import initialdata from "../data/inital-data";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "../components/column";
+import initaldata from "../data/inital-data";
+
+type objectType = {
+  [key: string]: { id: string; title: string; taskIds: string[] };
+};
 
 const Home: NextPage = () => {
-  let state: any[] = initialdata;
+  const values: objectType = initialdata.columns;
   return (
     <Box as={Container} maxW={"5xl"}>
       <VStack m={"5%"}>
@@ -16,11 +21,11 @@ const Home: NextPage = () => {
 
         <Box>{/* <DragDropContext></DragDropContext> */}</Box>
         <Box>
-          {state.map((columnItem) => (
+          {Object.entries(values).map(([key, value]) => (
             <Column
-              key={columnItem.title}
-              title={columnItem.title}
-              taskIds={columnItem.taskIds}
+              key={key}
+              title={value.title}
+              data={value.taskIds.map((taskId) => initaldata.tasks[taskId])}
             />
           ))}
         </Box>

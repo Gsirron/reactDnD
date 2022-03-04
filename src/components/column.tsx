@@ -1,20 +1,24 @@
 import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
 import React from "react";
 import Task from "./task";
+import initaldata from "../data/inital-data";
 
 type ColumnProps = {
   title: string;
-  taskIds: any[];
+  data: {
+    id: string;
+    content: string;
+  };
 };
 
 const Column = (props: ColumnProps) => {
-  const { title, taskIds } = props;
+  const { title, taskId } = props;
   return (
     <Flex>
       <VStack>
         <Heading>{title}</Heading>
-        {taskIds.map((taskItem) => (
-          <Task key={taskItem.content} content={taskItem.content} />
+        {taskId.map((taskItem) => (
+          <Task key={taskItem} content={taskItem} />
         ))}
       </VStack>
     </Flex>
